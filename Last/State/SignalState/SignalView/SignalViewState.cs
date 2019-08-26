@@ -17,7 +17,7 @@ namespace SpectrumVisor
         public SignalViewType CurrentType { get; set; }
         private Dictionary<SignalViewType, ISignalsVisualizer> views;
 
-        public SignalViewState(SignalManager manager, SignalViewType current)
+        public SignalViewState(SignalsModel manager, SignalViewType current)
         {
             views = new Dictionary<SignalViewType, ISignalsVisualizer>();
             SetView( new AloneVisualizer(manager.Sum), SignalViewType.Summarized);
@@ -28,7 +28,7 @@ namespace SpectrumVisor
             CurrentType = current;
         }
 
-        public SignalViewState(SignalManager manager) : this(manager, DEFAULT_VIEW) { }
+        public SignalViewState(SignalsModel manager) : this(manager, DEFAULT_VIEW) { }
 
         public void AddSignal(SinSignal signal, SignalViewType type)
         {

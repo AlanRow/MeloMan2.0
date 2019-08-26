@@ -9,14 +9,14 @@ namespace SpectrumVisor
     //класс, отвечающий за динамическую генерацию сигнала
     public class SinSignal : ISignal
     {
-        public readonly SignalOptions Options;
+        public readonly SignalStuff Options;
 
-        public SinSignal(SignalOptions options)
+        public SinSignal(SignalStuff options)
         {
             Options = options;
         }
 
-        public int GetLength()
+        override public int GetLength()
         {
             return Options.Duration;
         }
@@ -24,10 +24,10 @@ namespace SpectrumVisor
         public double GetValueAt(int i)
         {
             return (i < Options.Start || i >= Options.Start + Options.Duration) ? 0 :
-                    Math.Sin((i + Options.PhaseOffset) * Options.Freq * Math.PI) * Options.Mult + Options.Const;
+                    Math.Sin((i + Options.PhaseOffset) / Options.Freq * Math.PI) * Options.Mult + Options.Const;
         }
 
-        virtual public IEnumerable<double> GetValues()
+        override public IEnumerable<double> GetValues()
         {
             for (var i = Options.Start; i < Options.Start + Options.Duration; i++)
             {

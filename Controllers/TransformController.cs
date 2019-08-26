@@ -12,10 +12,18 @@ namespace SpectrumVisor.Controllers
     //контроллерами
     public class TransformController
     {
-        public TransformController(AppController app, AppModel model)
+        private AppController app;
+        private SpectrumPanelView view;
+
+        public TransformController(AppController application, AppModel model)
         {
-            var view = new TransformView();
-            app.SetTransformView(view);
+            app = application;
+            view = new SpectrumPanelView();
+        }
+
+        public void Start()
+        {
+            //app.SetTransformView(view);
         }
     }
 }

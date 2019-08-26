@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpectrumVisor.Contexts;
 using SpectrumVisor.Models;
 using SpectrumVisor.Views;
 
@@ -12,10 +13,40 @@ namespace SpectrumVisor.Controllers
     //контроллерами
     public class SignalsController
     {
-        public SignalsController(AppController app, AppModel model)
-        {
-            var view = new SignalsView();
-            app.SetSignalsView(view);
-        }
+        //private AppController app;
+        //private AppModel model;
+        //private SignalsView view;
+
+        //public SignalsController(AppController application, AppModel appModel)
+        //{
+        //    app = application;
+        //    model = appModel;
+        //    view = new SignalsView();
+        //}
+
+        ////public IPanelView GetViewPanel()
+        ////{
+
+        ////}
+
+        //public void Start()
+        //{
+        //    var signals = model.Transformation.GetSignals()
+        //                        .Select(s => GetContext(s))
+        //                        .ToArray();
+        //    var sum = GetContext(model.Transformation.GetSum());
+        //    var norm = GetContext(model.Transformation.GetNorm());
+
+        //    var context = new SignalsViewContext(signals, sum, norm);
+
+        //    view.View(context);
+        //}
+
+        //private SignalViewContext GetContext(ISignal s)
+        //{
+        //    return new SignalViewContext(s,
+        //        model.GraphContext.GetContext(s),
+        //        model.TextContext.GetContext(s));
+        //}
     }
 }

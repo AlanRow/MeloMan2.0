@@ -10,7 +10,7 @@ namespace SpectrumVisor
     {
         private List<SignalViewOptions> options;
 
-        public ManagerVisualizer(SignalManager manager)
+        public ManagerVisualizer(SignalsModel manager)
         {
             options = new List<SignalViewOptions>();
 

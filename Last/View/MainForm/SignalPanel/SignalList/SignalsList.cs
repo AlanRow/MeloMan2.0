@@ -57,7 +57,7 @@ namespace SpectrumVisor
             return button;
         }
 
-        private Panel GetSignalFrame(SignalManager manager, SinSignal signal, int i)
+        private Panel GetSignalFrame(SignalsModel manager, SinSignal signal, int i)
         {
             var frame = new Panel
                 {

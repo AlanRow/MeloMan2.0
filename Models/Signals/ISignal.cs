@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace SpectrumVisor
 {
     //объект позволяющий получить изменчивое перечисление значений сигнала
-    public interface ISignal
+    abstract public class ISignal
     {
-        IEnumerable<double> GetValues();
-        int GetLength();
+        abstract public IEnumerable<double> GetValues();
+        virtual public int GetLength()
+        {
+            return GetValues().Count();
+        }
     }
 }

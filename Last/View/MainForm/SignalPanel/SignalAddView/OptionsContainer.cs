@@ -22,7 +22,7 @@ namespace SpectrumVisor
             ErrorMessages = new List<string>();
         }
 
-        public SignalOptions GetOptions()
+        public SignalStuff GetOptions()
         {
             ErrorMessages = new List<string>();
 
@@ -35,7 +35,7 @@ namespace SpectrumVisor
             if (ErrorMessages.Count > 0)
                 return null;
 
-            return new SignalOptions(start.Value, dur.Value, freq, mult, c);
+            return new SignalStuff(start.Value, dur.Value, freq, mult, c);
         }
 
         private int? initIntPar(SubscribedField form)

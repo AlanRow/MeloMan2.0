@@ -10,9 +10,21 @@ namespace SpectrumVisor.Parameters
     {
         private double value;
 
+        public DoubleParam(string label, string shortName, double doubleValue)
+        {
+            Label = label;
+            ShortName = shortName;
+            value = doubleValue;
+        }
+
         public override string GetStrValue()
         {
             return value.ToString();
+        }
+
+        public double GetValue()
+        {
+            return value;
         }
 
         public override void SetValue(string strValue)

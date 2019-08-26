@@ -8,35 +8,50 @@ namespace SpectrumVisor
 {
     //агрегирует информацию об исходных сигналах
     //сообщает о создании и удалении сигнала
-    public class SignalManager
+    public class SignalsModel
     {
         //исходные сигналы
         public List<SinSignal> Signals { get; private set; }
         public SumSignal Sum { get; private set;}
+
+        //next ID
+        private long nextID;
 
         //общая длительность по времени (не используется)
         //public double TimeDuration { get; private set; }
         public int Size { get; private set; }
 
 
-        public delegate void SignalsChanged(SinSignal gener);
-        public event SignalsChanged AddedSignal;
-        public event SignalsChanged DeletedSignal;
+        //public delegate void SignalsChanged(SinSignal gener);
+        //public event SignalsChanged AddedSignal;
+        //public event SignalsChanged DeletedSignal;
 
-        public SignalManager(int size)
+        public SignalsModel(int size)
         {
             Signals = new List<SinSignal>();
             Sum = new SumSignal(this);
             Size = size;
         }
 
-        public void AddSignal(SinSignal signal)
+        public ISignal AddSignal(SignalStuff material)
         {
-            Signals.Add(signal);
+            Signals.Add(new SinSignal(material));
+            return Signals[Signals.Count - 1];
 
-            if (AddedSignal != null)
-                AddedSignal(signal);
+            //if (AddedSignal != null)
+            //    AddedSignal(signal);
         }
+
+        //public SinSignal GetSignalById(int id)
+        //{
+        //    return Signals.Where(s => s.ID == id).First();
+        //}
+
+        //public void DeleteSignalById(int id)
+        //{
+        //    var index = Signals.Where(s => s.ID == id).First().ID;
+        //    Signals.RemoveAt(id);
+        //}
 
         public void DeleteSignal(SinSignal signal)
         {
@@ -45,9 +60,8 @@ namespace SpectrumVisor
             if (i >= 0)
                 Signals.RemoveAt(i);
 
-
-            if (AddedSignal != null)
-                DeletedSignal(signal);
+            //if (AddedSignal != null)
+            //    DeletedSignal(signal);
         }
     }
 }

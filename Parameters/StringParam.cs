@@ -10,6 +10,13 @@ namespace SpectrumVisor.Parameters
     {
         private string value;
 
+        public StringParam(string label, string shortName, string startValue)
+        {
+            Label = label;
+            ShortName = shortName;
+            value = startValue;
+        }
+
         public override string GetStrValue()
         {
             return value;

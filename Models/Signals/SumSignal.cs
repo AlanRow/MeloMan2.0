@@ -9,19 +9,19 @@ namespace SpectrumVisor
     //возвращает сумму сигналов менеджера
     public class SumSignal : ISignal
     {
-        private readonly SignalManager manager;
+        private readonly SignalsModel manager;
 
-        public SumSignal(SignalManager main)
+        public SumSignal(SignalsModel main)
         {
             manager = main;
         }
 
-        public int GetLength()
+        override public int GetLength()
         {
             return manager.Size;
         }
 
-        public IEnumerable<double> GetValues()
+        override public IEnumerable<double> GetValues()
         {
             for (var i = 0; i < manager.Size; i++)
             {

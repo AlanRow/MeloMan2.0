@@ -15,6 +15,11 @@ namespace SpectrumVisor
         private string path;
         private StringBuilder builder;
 
+        static public void Write(string file, string message)
+        {
+            File.AppendAllText(file, DateTime.Now.ToString() + ": " + message);
+        }
+
         public Logger(string logPath)
         {
             builder = new StringBuilder();

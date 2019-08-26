@@ -11,7 +11,7 @@ namespace SpectrumVisor
     {
         public static int DEFAULT_SIZE = 1024;
 
-        public readonly SignalManager Internal;
+        public readonly SignalsModel Internal;
         public readonly SignalViewState View;
 
         public delegate void SignalChanged();
@@ -20,7 +20,7 @@ namespace SpectrumVisor
 
         public SignallController(int size)
         {
-            Internal = new SignalManager(size);
+            Internal = new SignalsModel(size);
             View = new SignalViewState(Internal);
             ViewChanged = () => { };
             SignChanged = () => { };

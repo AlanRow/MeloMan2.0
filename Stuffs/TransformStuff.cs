@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpectrumVisor
+namespace SpectrumVisor.Stuffs
 {
     //служит для объединения свойств преобразования
-    public class TransformOptions
+    public class TransformStuff
     {
+        public TransformType Type { get; set; }
         private double start;
         private double step;
         private int count;
@@ -46,8 +47,22 @@ namespace SpectrumVisor
             }
         }
 
-        public TransformOptions()
+        public double[] GetFreqs()
         {
+            var freqs = new double[CountFreq];
+            var freq = StartFreq;
+            for (var i = 0; i < freqs.Length; i++)
+            {
+                freqs[i] = freq;
+                freq += StepFreq;
+            }
+
+            return freqs;
+        }
+
+        public TransformStuff()
+        {
+            Type = TransformType.Fourier;
             start = 0.1;
             step = 0.1;
             count = 30;

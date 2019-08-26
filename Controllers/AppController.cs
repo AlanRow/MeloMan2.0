@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpectrumVisor.Contexts;
+using SpectrumVisor.Converters;
 using SpectrumVisor.Models;
+using SpectrumVisor.Parameters;
 using SpectrumVisor.State.Signal;
 using SpectrumVisor.Views;
 
@@ -14,6 +18,12 @@ namespace SpectrumVisor.Controllers
     {
         private AppView view;
         private AppModel model;
+        private AppForm form;
+
+        private AddSignalController signalIniter;
+
+        //private SignalsController signals;
+        //private TransformController transform;
 
         //private SignalModel signalModel;
         //private TransformsModel transformsModel;
@@ -22,44 +32,41 @@ namespace SpectrumVisor.Controllers
         public AppController(AppModel appModel)
         {
             model = appModel;
-            view = new AppView();
-            var signals = new SignalsController(this, model);
-            var transform = new TransformController(this, model);
+            model.Transformation.AddSignal(new SignalStuff(
+                0, model.Size, 48, 10, 15));
+            model.Transformation.AddSignal(new SignalStuff(
+                0, model.Size, 32, 10, 15));
+            view = new AppView(this);
+            form = new AppForm(view.View(AppContextConverter.GetContext(model)));
 
-            //    signalModel = new SignalModel(model);
-            //    transformsModel = new TransformsModel(signalModel);
+            signalIniter = new AddSignalController(model);
 
-            //    var signal = new SignalController(signalModel);
-            //    var transforms = new TransformsController(transformsModel);
-
-            //    var view = new AppView(signal.GetView(), transforms.GetView());
-            //    view.View();
+            model.Transformation.SignalsChanged += () =>
+            {
+                UpdateAppView();
+            };
         }
 
         public void Start()
         {
-            view.View();
+            UpdateAppView();
+
+            Application.Run(form);
         }
 
-        public void SetSignalsView(SignalsView signalsView)
+        public void DeleteSignal(int id)
         {
-            view.ViewSignal(signalsView.View());
+            model.Transformation.DeleteSignalById(id);
         }
 
-        public void SetTransformView(TransformView transformView)
+        public void AddSignal()
         {
-            view.ViewTransform(transformView.View());
+            signalIniter.AddSignal();
         }
 
-        //заглушка
-        //public ISignal AddSignal()
-        //{
-        //    return new DigitalSignal(new double[model.Size]);
-        //}
-
-        //public Start()
-        //{
-        //    view.View();
-        //}
+        public void UpdateAppView()
+        {
+            form.Update(view.View(AppContextConverter.GetContext(model)));
+        }
     }
 }

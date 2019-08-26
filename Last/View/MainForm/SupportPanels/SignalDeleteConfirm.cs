@@ -10,7 +10,7 @@ namespace SpectrumVisor
 {
     class SignalDeleteConfirm : Form
     {
-        public SignalDeleteConfirm(SignalManager manager, SinSignal signal)
+        public SignalDeleteConfirm(SignalsModel manager, SinSignal signal)
         {
             MaximumSize = new Size(400, 300);
             MinimumSize = new Size(400, 300);

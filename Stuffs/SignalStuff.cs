@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SpectrumVisor
 {
     //агрегирует информацию о сигнале
-    public class SignalOptions
+    public class SignalStuff
     {
         //начало сигнала (пока не влияет)
         private int start;
@@ -55,7 +55,7 @@ namespace SpectrumVisor
         //фактор затухания, не применяется
         //public double Fading { get; set; }
 
-        public SignalOptions(int startIndexx, int durationLength, double frequencyMult, double mult, double constant)
+        public SignalStuff(int startIndexx, int durationLength, double frequencyMult, double mult, double constant)
         {
             Start = startIndexx;
             Duration = durationLength;
@@ -64,29 +64,8 @@ namespace SpectrumVisor
             Const = constant;
         }
 
-        public SignalOptions(int startIndex, int durationLength) : this(startIndex, durationLength,
+        public SignalStuff(int startIndex, int durationLength) : this(startIndex, durationLength,
                                                                          128.0/durationLength, 100, 0)
         { }
-
-        public string GetTextFormula()
-        {
-            if (Mult == 0)
-                return "0";
-
-            if (Freq == 0)
-                return (Math.Sin(PhaseOffset) + Const).ToString();
-
-            var argStr = (PhaseOffset > 0) ? "(x + " + PhaseOffset + ")" :
-                (PhaseOffset < 0) ? "(x - " + Math.Abs(PhaseOffset) + ")" : "x";
-
-            var freqStr = (Freq != 1) ? Freq.ToString() + "PI" : "PI";
-
-            var multStr = (Mult != 1) ? Mult + " * " : "";
-
-            var constStr = (Const > 0) ? " + " + Const :
-                (Const < 0) ? " - " + Math.Abs(Const) : "";
-
-            return multStr + "sin(" + freqStr + argStr + ")" + constStr;
-        }
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SpectrumVisor.Views
 {
-    interface IDialogViewcs : IView
+    interface IDialogView : IView
     {
         Form View();
     }

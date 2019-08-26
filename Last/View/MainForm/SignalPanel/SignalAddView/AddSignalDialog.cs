@@ -11,7 +11,7 @@ namespace SpectrumVisor
     //окно создания нового сигнала
     class AddSignalDialog : Form
     {
-        private SignalOptions opts;
+        private SignalStuff opts;
         private Label errorLabel;
 
         public AddSignalDialog(SignallController signal)
@@ -21,7 +21,7 @@ namespace SpectrumVisor
             Height = 600;
             FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            opts = new SignalOptions(0, signal.Internal.Size);
+            opts = new SignalStuff(0, signal.Internal.Size);
 
             var table = new TableLayoutPanel();
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
