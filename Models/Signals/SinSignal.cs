@@ -24,7 +24,7 @@ namespace SpectrumVisor
         public double GetValueAt(int i)
         {
             return (i < Options.Start || i >= Options.Start + Options.Duration) ? 0 :
-                    Math.Sin((i + Options.PhaseOffset) / Options.Freq * Math.PI) * Options.Mult + Options.Const;
+                    Math.Sin((i + Options.PhaseOffset) / Options.Freq * Math.PI) * Options.Mult;
         }
 
         override public IEnumerable<double> GetValues()

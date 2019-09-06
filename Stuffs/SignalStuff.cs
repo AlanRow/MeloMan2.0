@@ -51,7 +51,7 @@ namespace SpectrumVisor
         //множитель функции
         public double Mult { get; set; }
         //прибавочная константа
-        public double Const { get; set; }
+        //public double Const { get; set; }
         //фактор затухания, не применяется
         //public double Fading { get; set; }
 
@@ -61,7 +61,7 @@ namespace SpectrumVisor
             Duration = durationLength;
             Freq = frequencyMult;
             Mult = mult;
-            Const = constant;
+            //Const = constant;
         }
 
         public SignalStuff(int startIndex, int durationLength) : this(startIndex, durationLength,

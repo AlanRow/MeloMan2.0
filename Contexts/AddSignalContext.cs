@@ -16,7 +16,7 @@ namespace SpectrumVisor.Contexts
             var param = (InputParameters as SignalParameters);
             return new Param[][] { new Param[] { param.Start, param.Duration },
                                    new Param[] { param.Freq, param.Mult },
-                                   new Param[] { param.Const, param.Name} };
+                                   new Param[] { param.Name} };
         }
     }
 }

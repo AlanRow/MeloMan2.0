@@ -37,7 +37,7 @@ namespace SpectrumVisor.Models
                 return "0";
 
             if (stuff.Freq == 0)
-                return (Math.Sin(stuff.PhaseOffset) + stuff.Const).ToString();
+                return (Math.Sin(stuff.PhaseOffset)).ToString();
 
             var argStr = (stuff.PhaseOffset > 0) ? "(x + " + stuff.PhaseOffset + ")" :
                 (stuff.PhaseOffset < 0) ? "(x - " + Math.Abs(stuff.PhaseOffset) + ")" : "x";
@@ -45,11 +45,8 @@ namespace SpectrumVisor.Models
             var freqStr = (stuff.Freq != 1) ? stuff.Freq.ToString() + "PI" : "PI";
 
             var multStr = (stuff.Mult != 1) ? stuff.Mult + " * " : "";
-
-            var constStr = (stuff.Const > 0) ? " + " + stuff.Const :
-                (stuff.Const < 0) ? " - " + Math.Abs(stuff.Const) : "";
-
-            return multStr + "sin(" + freqStr + argStr + ")" + constStr;
+            
+            return multStr + "sin(" + freqStr + argStr + ")";
         }
     }
 }
