@@ -28,24 +28,10 @@ namespace SpectrumVisor.Views.SpectrumViews
 
             pan.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
-            //"накручиваем" линейный сигнал на окружность
-            var freq = 0d;
-
-            try
-            {
-                freq = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Freq;
-            } catch (IndexOutOfRangeException ex)
-            {
-                return pan;
-            }
-
-            var points = context.Origin.GetValues().Select((v, i) => Complex.FromPolarCoordinates(v, -i /* * timeFactor */))
-                                                   .ToArray();
-
-            foreach (var p in points)
-            {
-                //MessageBox.Show(p.ToString());
-            }
+            //foreach (var p in points)
+            //{
+            //    //MessageBox.Show(p.ToString());
+            //}
             //var points = new Complex[] { Complex.FromPolarCoordinates(0.5, 0),
             //                             Complex.FromPolarCoordinates(0.5, Math.PI / 2),
             //                             Complex.FromPolarCoordinates(0.5, Math.PI),
@@ -58,8 +44,20 @@ namespace SpectrumVisor.Views.SpectrumViews
 
             round.Paint += (sender, ev) =>
             {
+                var freq = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Freq;
                 var center = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Coords;
                 //var center = new Point((int)Math.Round(centerCoords.Real), (int)Math.Round(centerCoords.Imaginary));
+                var points = context.Origin.GetValues().Select((v, i) => Complex.FromPolarCoordinates(v, -i * freq * 2 * Math.PI / context.Origin.GetLength()/* * timeFactor */))
+                                                       .ToArray();
+
+                var max = points.Select(p => p.Magnitude)
+                                .Max();
+
+                if (max != 0)
+                {
+                    points = points.Select(p => p / max).ToArray();
+                    center /= max;
+                }
 
                 ev.Graphics.Clear(Color.White);
                 ev.Graphics.DrawImage(RoundDrawer.GetView(round.ClientSize, center, points, context.RoundGraphics), new Point(0, 0));

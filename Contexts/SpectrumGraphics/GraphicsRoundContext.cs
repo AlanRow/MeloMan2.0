@@ -33,6 +33,6 @@ namespace SpectrumVisor.Contexts.SpectrumGraphics
             RoundThickness = borderThick;
         }
 
-        public GraphicsRoundContext() : this(Color.Green, 5, Color.Red, 8, Color.Green, 2, Color.Black, 5) { }
+        public GraphicsRoundContext() : this(Color.Green, 3, Color.Red, 8, Color.Green, 1, Color.Black, 3) { }
     }
 }

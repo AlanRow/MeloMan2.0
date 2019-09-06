@@ -23,9 +23,12 @@ namespace SpectrumVisor.Models.Transformers
 
             for (var i = 0; i < freqs.Length; i++)
             {
-                spectrum.SetPoint(i, 0, new FreqPoint(calc.CalcFreq(signal, freqs[i]), freqs[i]));
+                var fourier = calc.CalcFreq(signal, freqs[i]);
+                spectrum.SetPoint(i, 0, new FreqPoint(fourier, freqs[i]));
+                Logger.DEFLOG.WriteLog(String.Format("w: {0}; real: {1}; im: {2}; magnitude: {3}", freqs[i], fourier.Real, fourier.Imaginary, fourier.Magnitude));
             }
 
+            Logger.DEFLOG.Flush();
             return spectrum;
         }
     }

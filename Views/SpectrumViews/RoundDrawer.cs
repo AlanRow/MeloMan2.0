@@ -28,9 +28,6 @@ namespace SpectrumVisor.Views.SpectrumViews
             gr.DrawEllipse(new Pen(context.RoundColor, context.RoundThickness), 
                            new Rectangle(0, 0, size, size));
 
-            DrawPoint(gr, GetAbsoluteCoords(center, size), context.CenterRadius, context.CenterColor,
-                      center.Magnitude.ToString());
-
             var points = values.Select(v => GetAbsoluteCoords(v, size)).ToArray();
 
             for (var i = 0; i < points.Length; i++)
@@ -41,27 +38,30 @@ namespace SpectrumVisor.Views.SpectrumViews
 
             gr.DrawCurve(new Pen(context.LineColor, context.LineThickness), points);
 
+            DrawPoint(gr, GetAbsoluteCoords(center, size), context.CenterRadius, context.CenterColor,
+                      center.Magnitude.ToString());
+
             //log
             //logger.WriteLog(String.Format("Transform lenth is: {0}", spectrum.GetSpectrum()[0].Length));
 
             //foreach (var point in values)
             //{
-                //log
-                //logger.WriteLog(String.Format("Freq is {0}, X is: {1}, Y is: {2}", freq.Freq, freq.Coords.Real, freq.Coords.Imaginary));
-                //var value = point;
+            //log
+            //logger.WriteLog(String.Format("Freq is {0}, X is: {1}, Y is: {2}", freq.Freq, freq.Coords.Real, freq.Coords.Imaginary));
+            //var value = point;
 
-                //Point? absoluteCoords = new Point((int)Math.Round((value.X * size + size) / 2.0),
-                //    (int)Math.Round((value.Y * size + size) / 2.0));
+            //Point? absoluteCoords = new Point((int)Math.Round((value.X * size + size) / 2.0),
+            //    (int)Math.Round((value.Y * size + size) / 2.0));
 
 
-                //if (last != null)
-                //    gr.DrawLine(Pens.Orange, last.Value, absoluteCoords.Value);
+            //if (last != null)
+            //    gr.DrawLine(Pens.Orange, last.Value, absoluteCoords.Value);
 
-                //var freqStr = point.Freq.ToString();
-                //gr.DrawString(freqStr, opts.TextFont, Brushes.Black, absoluteCoords.Value.X - rad,
-                    //absoluteCoords.Value.Y - rad);
+            //var freqStr = point.Freq.ToString();
+            //gr.DrawString(freqStr, opts.TextFont, Brushes.Black, absoluteCoords.Value.X - rad,
+            //absoluteCoords.Value.Y - rad);
 
-                //last = absoluteCoords;
+            //last = absoluteCoords;
             //}
 
             //logger.Flush();//log
