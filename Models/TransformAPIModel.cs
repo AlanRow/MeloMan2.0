@@ -29,7 +29,7 @@ namespace SpectrumVisor.Models
             norm = new NormalizeModel();
             ManageModel = new SignalsManageModel();
 
-            SignalsChanged = new StateNotification(() => { });
+            SignalsChanged = new StateNotification(() => Transform(new TransformStuff()));
             TransformChanged = new StateNotification(() => { });
         }
 

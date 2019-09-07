@@ -30,11 +30,11 @@ namespace SpectrumVisor.Views.SpectrumViews
 
             var points = values.Select(v => GetAbsoluteCoords(v, size)).ToArray();
 
-            for (var i = 0; i < points.Length; i++)
-            {
-                DrawPoint(gr, points[i], context.PointsRadius, context.PointsColor,
-                          values[i].Magnitude.ToString());
-            }
+            //for (var i = 0; i < points.Length; i++)
+            //{
+            //    DrawPoint(gr, points[i], context.PointsRadius, context.PointsColor,
+            //              String.Format("{0:0.###}", values[i].Magnitude));
+            //}
 
             gr.DrawCurve(new Pen(context.LineColor, context.LineThickness), points);
 
@@ -80,7 +80,7 @@ namespace SpectrumVisor.Views.SpectrumViews
             gr.FillEllipse(pointBr, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
 
             gr.DrawString(label, new Font(FontFamily.GenericSerif, 8), Brushes.Black, 
-                                          p.X - radius, p.Y - radius);
+                                        p.X - radius, p.Y - radius);
         }
     }
 }
