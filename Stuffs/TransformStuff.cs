@@ -63,9 +63,9 @@ namespace SpectrumVisor.Stuffs
         public TransformStuff()
         {
             Type = TransformType.Fourier;
-            start = 0.25;
-            step = 0.25;
-            count = 50;
+            start = 0.05;
+            step = 0.05;
+            count = 1000;
         }
     }
 }

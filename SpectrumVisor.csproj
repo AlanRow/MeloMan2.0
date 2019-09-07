@@ -71,6 +71,7 @@
     <Compile Include="Contexts\GraphicsSignalContext.cs" />
     <Compile Include="Contexts\SignalsViewContext.cs" />
     <Compile Include="Contexts\SignalViewContext.cs" />
+    <Compile Include="Contexts\SpectrumGraphics\GraphicsLinearContext.cs" />
     <Compile Include="Contexts\SpectrumGraphics\GraphicsRoundContext.cs" />
     <Compile Include="Contexts\SpectrumViewContext.cs" />
     <Compile Include="Contexts\StartContext.cs" />
@@ -135,6 +136,8 @@
     <Compile Include="Views\SignalsView.cs" />
     <Compile Include="Views\SpectrumViews\RoundDrawer.cs" />
     <Compile Include="Views\SpectrumViews\RoundView.cs" />
+    <Compile Include="Views\SpectrumViews\SpectrogramView.cs" />
+    <Compile Include="Views\SpectrumViews\SpectrumDensityChart.cs" />
     <Compile Include="Views\TransformView.cs" />
     <Compile Include="Debugging\Logger.cs" />
     <Compile Include="Program.cs" />

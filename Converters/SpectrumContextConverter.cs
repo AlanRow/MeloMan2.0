@@ -13,7 +13,7 @@ namespace SpectrumVisor.Converters
         static public SpectrumViewContext GetSpectrumContext(AppModel model)
         {
             return new SpectrumViewContext(model.Transformation.GetTransform(), model.Transformation.GetSum(), 
-                                           model.GraphContext.RoundView);
+                                           model.GraphContext.RoundView, model.GraphContext.LinearView);
         }
     }
 }

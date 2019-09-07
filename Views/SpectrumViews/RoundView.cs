@@ -45,7 +45,7 @@ namespace SpectrumVisor.Views.SpectrumViews
             round.Paint += (sender, ev) =>
             {
                 var freq = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Freq;
-                var center = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Coords;
+                var center = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Coords / context.Origin.GetLength();
                 //var center = new Point((int)Math.Round(centerCoords.Real), (int)Math.Round(centerCoords.Imaginary));
                 var points = context.Origin.GetValues().Select((v, i) => Complex.FromPolarCoordinates(v, -i * freq * 2 * Math.PI / context.Origin.GetLength()/* * timeFactor */))
                                                        .ToArray();
@@ -54,10 +54,8 @@ namespace SpectrumVisor.Views.SpectrumViews
                                 .Max();
 
                 if (max != 0)
-                {
                     points = points.Select(p => p / max).ToArray();
-                    //center /= max;
-                }
+
 
                 Logger.DEFLOG.WriteLog(String.Format("Mass center, on picture: freq: {0}; x: {1}; y: {2}; mod: {3}", freq, center.Real
                                                     , center.Imaginary, center.Magnitude));

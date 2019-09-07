@@ -27,9 +27,11 @@ namespace SpectrumVisor.Views
         {
             views = new Dictionary<ViewType, ISpectrumView>
             {
-                [ViewType.RoundView] = new RoundView()
+                [ViewType.RoundView] = new RoundView(),
+                [ViewType.LinearChart] = new SpectrumDensityChart(),
+                [ViewType.Spectrogram] = new SpectrogramView()
             };
-            spectrumView = views[ViewType.RoundView];
+            spectrumView = views[ViewType.Spectrogram];
         }
 
         public Panel View(SpectrumViewContext context)

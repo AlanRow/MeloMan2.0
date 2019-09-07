@@ -13,12 +13,14 @@ namespace SpectrumVisor.Contexts
         readonly public Spectrum Transformed;
         readonly public ISignal Origin;
         readonly public GraphicsRoundContext RoundGraphics;
+        readonly public GraphicsLinearContext LinearGraphics;
 
-        public SpectrumViewContext(Spectrum spectrum, ISignal signal, GraphicsRoundContext grContext)
+        public SpectrumViewContext(Spectrum spectrum, ISignal signal, GraphicsRoundContext round, GraphicsLinearContext linear)
         {
             Transformed = spectrum;
             Origin = signal;
-            RoundGraphics = grContext;
+            RoundGraphics = round;
+            LinearGraphics = linear;
         }
     }
 }

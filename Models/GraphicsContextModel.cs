@@ -13,12 +13,14 @@ namespace SpectrumVisor.Models
         private Dictionary<ISignal, GraphicsSignalContext> contexts;
 
         public GraphicsRoundContext RoundView { get; private set; }
+        public GraphicsLinearContext LinearView { get; private set; }
 
         public GraphicsContextModel()
         {
             contexts = new Dictionary<ISignal, GraphicsSignalContext>();
 
             RoundView = new GraphicsRoundContext();
+            LinearView = new GraphicsLinearContext();
         }
 
         public void SetContext(ISignal signal, GraphicsSignalContext context)
