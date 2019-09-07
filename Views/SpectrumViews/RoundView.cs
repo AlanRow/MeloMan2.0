@@ -54,8 +54,10 @@ namespace SpectrumVisor.Views.SpectrumViews
                                 .Max();
 
                 if (max != 0)
+                {
                     points = points.Select(p => p / max).ToArray();
-
+                    center /= max;
+                }
 
                 Logger.DEFLOG.WriteLog(String.Format("Mass center, on picture: freq: {0}; x: {1}; y: {2}; mod: {3}", freq, center.Real
                                                     , center.Imaginary, center.Magnitude));

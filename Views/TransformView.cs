@@ -20,8 +20,14 @@ namespace SpectrumVisor.Views
         }
     
         //private Panel transformPanel;
-        private ISpectrumView spectrumView;
         private Dictionary<ViewType, ISpectrumView> views;
+        private ViewType currentView;
+
+        private Panel lastSpectrum;
+        private Panel lastView;
+        private ComboBox viewChangeBox;
+
+        private SpectrumViewContext lastContext;
 
         public SpectrumPanelView()
         {
@@ -31,7 +37,19 @@ namespace SpectrumVisor.Views
                 [ViewType.LinearChart] = new SpectrumDensityChart(),
                 [ViewType.Spectrogram] = new SpectrogramView()
             };
-            spectrumView = views[ViewType.Spectrogram];
+            currentView = ViewType.Spectrogram;
+
+            viewChangeBox = new ComboBox
+            {
+                Width = 200
+            };
+            viewChangeBox.Items.Add(new BoxItem(ViewType.Spectrogram, "Спектрограмма"));
+            viewChangeBox.Items.Add(new BoxItem(ViewType.LinearChart, "График спектра мощности"));
+            viewChangeBox.Items.Add(new BoxItem(ViewType.RoundView, "Диграма преобразования Фурье"));
+            viewChangeBox.SelectedIndexChanged += (sender, ev) => {
+                currentView = ((ViewType)((BoxItem)((ComboBox)sender).SelectedItem).Key);
+                SwitchView();
+            };
         }
 
         public Panel View(SpectrumViewContext context)
@@ -41,12 +59,24 @@ namespace SpectrumVisor.Views
                 Dock = DockStyle.Fill
             };
 
-            var spectrumPan = spectrumView.View(context);
-            spectrumPan.Dock = DockStyle.Fill;
+            lastSpectrum = views[currentView].View(context);
+            lastSpectrum.Dock = DockStyle.Fill;
 
-            pan.Controls.Add(spectrumPan);
+            pan.Controls.Add(viewChangeBox);
+            pan.Controls.Add(lastSpectrum);
+
+            lastView = pan;
+            lastContext = context;
 
             return pan;
+        }
+
+        private void SwitchView()
+        {
+            lastView.Controls.Remove(lastSpectrum);
+            lastSpectrum = views[currentView].View(lastContext);
+            lastView.Controls.Add(lastSpectrum);
+            lastView.Invalidate();
         }
     }
 }
