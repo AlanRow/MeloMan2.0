@@ -16,7 +16,7 @@ namespace SpectrumVisor.Models
             set = new Dictionary<TransformType, ITransformer>
             {
                 [TransformType.Fourier] = new FourierTransformer(),
-                [TransformType.Windowed] = new WindowedFourierTransformer(),
+                //[TransformType.Windowed] = new WindowedFourierTransformer(),
                 //[TransformType.Gabor] = new GaborTransformer()
             };
         }

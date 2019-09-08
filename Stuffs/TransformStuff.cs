@@ -60,12 +60,14 @@ namespace SpectrumVisor.Stuffs
             return freqs;
         }
 
-        public TransformStuff()
+        public TransformStuff(double start, double step, int count)
         {
             Type = TransformType.Fourier;
-            start = 0.05;
-            step = 0.05;
-            count = 1000;
+            StartFreq = start;
+            StepFreq = step;
+            CountFreq = count;
         }
+
+        public TransformStuff() : this(0.05, 0.05, 1000){ }
     }
 }

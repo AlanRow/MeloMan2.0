@@ -42,5 +42,24 @@ namespace SpectrumVisor.Stuffs
         {
             get { return WinSize / 2; }
         }
+
+        public IEnumerable<int> Centers()
+        {
+            var center = LeftWinSize;
+
+            while (true)
+            {
+                yield return center;
+                center += WinStep;
+            }
+        }
+
+        public WindowedTransformStuff(double start, double step, int count, int winSize, int winStep) : base(start, step, count)
+        {
+            WinSize = winSize;
+            WinStep = winStep;
+        }
+
+        public WindowedTransformStuff() : this(0.05, 0.05, 1000, 128, 128) { }
     }
 }

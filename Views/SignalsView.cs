@@ -18,7 +18,7 @@ namespace SpectrumVisor.Views
         {
             Sum,
             All,
-            Norm
+            //Norm
         }
 
         //private Panel signals;
@@ -54,7 +54,7 @@ namespace SpectrumVisor.Views
             var viewChangeBox = new ComboBox();
             viewChangeBox.Items.Add(new BoxItem(ViewType.All, "Все"));
             viewChangeBox.Items.Add(new BoxItem(ViewType.Sum, "Сумма"));
-            viewChangeBox.Items.Add(new BoxItem(ViewType.Norm, "Нормализованный"));
+            //viewChangeBox.Items.Add(new BoxItem(ViewType.Norm, "Нормализованный"));
             viewChangeBox.SelectedIndexChanged += (sender, ev) => {
                 currentView = ((ViewType)((BoxItem)((ComboBox)sender).SelectedItem).Key);
                 SwitchView();
@@ -88,7 +88,7 @@ namespace SpectrumVisor.Views
             {
                 [ViewType.All] = chartView.View(context.Signals),
                 [ViewType.Sum] = chartView.View(new[] { context.Sum }),
-                [ViewType.Norm] = chartView.View(new[] { context.Norm }),
+                //[ViewType.Norm] = chartView.View(new[] { context.Norm }),
             };
 
             lastChart = charts[currentView];

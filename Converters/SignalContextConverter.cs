@@ -16,9 +16,9 @@ namespace SpectrumVisor.Converters
                                 .Select(s => GetSignalContext(s, model))
                                 .ToArray();
             var sum = GetAbstractSignalContext(model.Transformation.GetSum(), model);
-            var norm = GetAbstractSignalContext(model.Transformation.GetNorm(), model);
+            //var norm = GetAbstractSignalContext(model.Transformation.GetFiltered(), model);
 
-            return new SignalsViewContext(signals, sum, norm);
+            return new SignalsViewContext(signals, sum);
         }
 
         static public SignalViewContext GetSignalContext(ISignal s, AppModel model)

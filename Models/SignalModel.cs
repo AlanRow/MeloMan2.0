@@ -15,7 +15,7 @@ namespace SpectrumVisor
         public SumSignal Sum { get; private set;}
 
         //next ID
-        private long nextID;
+        //private long nextID;
 
         //общая длительность по времени (не используется)
         //public double TimeDuration { get; private set; }

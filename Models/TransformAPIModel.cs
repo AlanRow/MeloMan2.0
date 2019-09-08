@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SpectrumVisor.Stuffs;
 using SpectrumVisor.Models.Signals;
+using SpectrumVisor.Models.Filters;
 
 namespace SpectrumVisor.Models
 {
@@ -14,9 +15,9 @@ namespace SpectrumVisor.Models
     {
         private SignalsModel signals;
         private TransformModel transform;
-        private NormalizeModel norm;
-        readonly public SignalsManageModel ManageModel;
+        private IWindowFilter filter;
 
+        readonly public SignalsManageModel ManageModel;
         public delegate void StateNotification();
         public event StateNotification SignalsChanged;
         public event StateNotification TransformChanged;
@@ -26,10 +27,10 @@ namespace SpectrumVisor.Models
         {
             signals = new SignalsModel(size);
             transform = new TransformModel(new TransformersSetModel());
-            norm = new NormalizeModel();
+            filter = new RectangleFilter();
             ManageModel = new SignalsManageModel();
 
-            SignalsChanged = new StateNotification(() => Transform(new TransformStuff()));
+            SignalsChanged = new StateNotification(() => Transform(new WindowedTransformStuff()));
             TransformChanged = new StateNotification(() => { });
         }
 
@@ -43,10 +44,10 @@ namespace SpectrumVisor.Models
             return signals.Sum;
         }
 
-        public NormalizedSignal GetNorm()
-        {
-            return norm.GetNorm(GetSum());
-        }
+        //public ISignal GetFiltered()
+        //{
+        //    return filter.GetFiltered(GetSum());
+        //}
 
         public Spectrum GetTransform()
         {
@@ -83,6 +84,12 @@ namespace SpectrumVisor.Models
         public void Transform(TransformStuff material)
         {
             transform.Transform(material, GetSum());
+            TransformChanged();
+        }
+
+        public void Transform(WindowedTransformStuff material)
+        {
+            transform.Transform(material, GetSum(), filter);
             TransformChanged();
         }
     }

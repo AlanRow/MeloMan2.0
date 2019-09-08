@@ -86,14 +86,17 @@
     <Compile Include="Converters\SignalContextConverter.cs" />
     <Compile Include="Converters\SpectrumContextConverter.cs" />
     <Compile Include="Models\AppModel.cs" />
+    <Compile Include="Models\Filters\IFilter.cs" />
+    <Compile Include="Models\Filters\NoFilter.cs" />
+    <Compile Include="Models\Filters\RectangleFilter.cs" />
     <Compile Include="Models\FreqPoint.cs" />
     <Compile Include="Models\GraphicsContextModel.cs" />
     <Compile Include="Models\IFreqCalculator.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\NormalizeModel.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SignalsManageModel.cs" />
     <Compile Include="Models\Signals\RelativeNormalizedSignal.cs" />
-    <Compile Include="Models\Signals\WinSignal.cs" />
+    <Compile Include="Models\Signals\FilteredSignal.cs" />
     <Compile Include="Models\Spectrum.cs" />
     <Compile Include="Models\TransformAPIModel.cs" />
     <Compile Include="Models\TransformersSetModel.cs" />
@@ -116,7 +119,6 @@
     <Compile Include="Parameters\StringParam.cs" />
     <Compile Include="Parameters\SwitchingParam.cs" />
     <Compile Include="Models\Signals\DigitalSignal.cs" />
-    <Compile Include="Models\Signals\NormalizedSignal.cs" />
     <Compile Include="Stuffs\SignalStuff.cs" />
     <Compile Include="Models\Signals\ISignal.cs" />
     <Compile Include="Models\Signals\SumSignal.cs" />

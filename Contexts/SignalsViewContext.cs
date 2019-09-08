@@ -10,13 +10,13 @@ namespace SpectrumVisor.Contexts
     {
         readonly public SignalViewContext[] Signals;
         readonly public SignalViewContext Sum;
-        readonly public SignalViewContext Norm;
+        //readonly public SignalViewContext Norm;
 
-        public SignalsViewContext(SignalViewContext[] signals, SignalViewContext sum, SignalViewContext norm)
+        public SignalsViewContext(SignalViewContext[] signals, SignalViewContext sum)
         {
             Signals = signals;
             Sum = sum;
-            Norm = norm;
+            //Norm = norm;
         }
     }
 }
