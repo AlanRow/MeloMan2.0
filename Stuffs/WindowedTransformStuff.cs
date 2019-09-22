@@ -60,6 +60,11 @@ namespace SpectrumVisor.Stuffs
             WinStep = winStep;
         }
 
+        public WindowedTransformStuff(TransformStuff simple, int winSize, int winStep) : this(simple.StartFreq, simple.StepFreq, 
+                                                                                            simple.CountFreq, winSize, winStep) { }
+
+        public WindowedTransformStuff(TransformStuff simple) : this(simple, 128, 128) { }
+
         public WindowedTransformStuff() : this(0.05, 0.05, 1000, 128, 128) { }
     }
 }

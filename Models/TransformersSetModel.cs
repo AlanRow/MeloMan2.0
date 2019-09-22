@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpectrumVisor.Models.Filters;
 using SpectrumVisor.Models.Transformers;
 
 namespace SpectrumVisor.Models
 {
-    public class TransformersSetModel
+    public class WindowsSetModel
     {
-        private Dictionary<TransformType, ITransformer> set;
+        private Dictionary<WindowType, IWindowFilter> set;
 
-        public TransformersSetModel()
+        public WindowsSetModel()
         {
-            set = new Dictionary<TransformType, ITransformer>
+            set = new Dictionary<WindowType, IWindowFilter>
             {
-                [TransformType.Fourier] = new FourierTransformer(),
-                //[TransformType.Windowed] = new WindowedFourierTransformer(),
+                [WindowType.NoWin] = new NoFilter(),
+                [WindowType.Rectangle] = new RectangleFilter()
                 //[TransformType.Gabor] = new GaborTransformer()
             };
         }
 
-        public ITransformer GetTransformer(TransformType type)
+        public IWindowFilter GetTransformer(WindowType type)
         {
             return set[type];
         }

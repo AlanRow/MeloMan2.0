@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace SpectrumVisor.Controllers
                                                            par.Const.GetValue())).Item1;
             model.TextContext.SetContext(signal, new TextSignalContext(par.Name.GetStrValue(),
                                                                        par.Description.GetStrValue()));
+            model.GraphContext.SetContext(signal, new GraphicsSignalContext((par.LineColor as EnumParam<Color>).GetValue()));
         }
     }
 }

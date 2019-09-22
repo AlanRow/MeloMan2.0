@@ -27,15 +27,7 @@ namespace SpectrumVisor.Views.SpectrumViews
             };
 
             pan.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-            //foreach (var p in points)
-            //{
-            //    //MessageBox.Show(p.ToString());
-            //}
-            //var points = new Complex[] { Complex.FromPolarCoordinates(0.5, 0),
-            //                             Complex.FromPolarCoordinates(0.5, Math.PI / 2),
-            //                             Complex.FromPolarCoordinates(0.5, Math.PI),
-            //                             Complex.FromPolarCoordinates(0.5, 3 * Math.PI / 2)};
+            
             var round = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -46,7 +38,6 @@ namespace SpectrumVisor.Views.SpectrumViews
             {
                 var freq = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Freq;
                 var center = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Coords / context.Origin.GetLength();
-                //var center = new Point((int)Math.Round(centerCoords.Real), (int)Math.Round(centerCoords.Imaginary));
                 var points = context.Origin.GetValues().Select((v, i) => Complex.FromPolarCoordinates(v, -i * freq * 2 * Math.PI / context.Origin.GetLength()/* * timeFactor */))
                                                        .ToArray();
 
@@ -102,10 +93,9 @@ namespace SpectrumVisor.Views.SpectrumViews
 
                 freqScroll.ValueChanged += (sender, ev) => {
                     freqInd = freqScroll.Value;
-                    freqLabel.Text = "Текущая частота: " + context.Transformed.GetFreqsValues()
+                    freqLabel.Text = String.Format("Текущая частота: {0:0.##}", context.Transformed.GetFreqsValues()
                                             .Skip(freqScroll.Value)
-                                            .First()
-                                            .ToString();
+                                            .First());
                     round.Invalidate();
                 };
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpectrumVisor.Contexts;
+using SpectrumVisor.Controllers;
 using SpectrumVisor.Views.SpectrumViews;
 
 namespace SpectrumVisor.Views
@@ -18,7 +19,7 @@ namespace SpectrumVisor.Views
             LinearChart,
             Spectrogram
         }
-    
+
         //private Panel transformPanel;
         private Dictionary<ViewType, ISpectrumView> views;
         private ViewType currentView;
@@ -26,10 +27,11 @@ namespace SpectrumVisor.Views
         private Panel lastSpectrum;
         private Panel lastView;
         private ComboBox viewChangeBox;
+        private Button configButt;
 
         private SpectrumViewContext lastContext;
 
-        public SpectrumPanelView()
+        public SpectrumPanelView(AppController controller)
         {
             views = new Dictionary<ViewType, ISpectrumView>
             {
@@ -45,10 +47,19 @@ namespace SpectrumVisor.Views
             };
             viewChangeBox.Items.Add(new BoxItem(ViewType.Spectrogram, "Спектрограмма"));
             viewChangeBox.Items.Add(new BoxItem(ViewType.LinearChart, "График спектра мощности"));
-            viewChangeBox.Items.Add(new BoxItem(ViewType.RoundView, "Диграма преобразования Фурье"));
+            viewChangeBox.Items.Add(new BoxItem(ViewType.RoundView, "Диаграмма преобразования Фурье"));
             viewChangeBox.SelectedIndexChanged += (sender, ev) => {
                 currentView = ((ViewType)((BoxItem)((ComboBox)sender).SelectedItem).Key);
                 SwitchView();
+            };
+
+            configButt = new Button()
+            {
+                Text = "Настройки..."
+            };
+            configButt.Click += (sender, ev) =>
+            {
+                controller.ChangeTransformConfigs();
             };
         }
 
@@ -62,7 +73,17 @@ namespace SpectrumVisor.Views
             lastSpectrum = views[currentView].View(context);
             lastSpectrum.Dock = DockStyle.Fill;
 
-            pan.Controls.Add(viewChangeBox);
+            var controlPan = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                Height = 100,
+                FlowDirection = FlowDirection.LeftToRight
+            };
+
+            controlPan.Controls.Add(viewChangeBox);
+            controlPan.Controls.Add(configButt);
+
+            pan.Controls.Add(controlPan);
             pan.Controls.Add(lastSpectrum);
 
             lastView = pan;

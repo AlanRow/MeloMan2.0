@@ -66,6 +66,7 @@
     <Compile Include="AppForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BidirectDictionary.cs" />
     <Compile Include="Contexts\AddSignalContext.cs" />
     <Compile Include="Contexts\AppContext.cs" />
     <Compile Include="Contexts\GraphicsSignalContext.cs" />
@@ -76,8 +77,12 @@
     <Compile Include="Contexts\SpectrumViewContext.cs" />
     <Compile Include="Contexts\StartContext.cs" />
     <Compile Include="Contexts\TextSignalContext.cs" />
+    <Compile Include="Contexts\TransformContext.cs" />
+    <Compile Include="Contexts\TransformTypeContext.cs" />
+    <Compile Include="Contexts\WindowTransformContext.cs" />
     <Compile Include="Controllers\AddSignalController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\ConfigTransformController.cs" />
     <Compile Include="Controllers\InputFormController.cs" />
     <Compile Include="Controllers\SignalsController.cs" />
     <Compile Include="Controllers\StartController.cs" />
@@ -93,10 +98,10 @@
     <Compile Include="Models\GraphicsContextModel.cs" />
     <Compile Include="Models\IFreqCalculator.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\SignalsManageModel.cs" />
     <Compile Include="Models\Signals\RelativeNormalizedSignal.cs" />
     <Compile Include="Models\Signals\FilteredSignal.cs" />
+    <Compile Include="Models\Signals\WindowedSignal.cs" />
     <Compile Include="Models\Spectrum.cs" />
     <Compile Include="Models\TransformAPIModel.cs" />
     <Compile Include="Models\TransformersSetModel.cs" />
@@ -108,6 +113,8 @@
     <Compile Include="Models\TrType.cs" />
     <Compile Include="Parameters\DoubleParam.cs" />
     <Compile Include="Contexts\IInputFormContext.cs" />
+    <Compile Include="Parameters\EnumParam.cs" />
+    <Compile Include="Parameters\SwitchParam.cs" />
     <Compile Include="Parameters\IInputFormParameters.cs" />
     <Compile Include="Parameters\IntParam.cs" />
     <Compile Include="Exceptions\TwoLanguageException.cs" />
@@ -117,8 +124,11 @@
     <Compile Include="Parameters\SignalParameters.cs" />
     <Compile Include="Parameters\StartParameters.cs" />
     <Compile Include="Parameters\StringParam.cs" />
-    <Compile Include="Parameters\SwitchingParam.cs" />
     <Compile Include="Models\Signals\DigitalSignal.cs" />
+    <Compile Include="Parameters\TranformParameters.cs" />
+    <Compile Include="Parameters\TransformTypeParameters.cs" />
+    <Compile Include="Parameters\WindowTransformParameters.cs" />
+    <Compile Include="Stuffs\FilterStuff.cs" />
     <Compile Include="Stuffs\SignalStuff.cs" />
     <Compile Include="Models\Signals\ISignal.cs" />
     <Compile Include="Models\Signals\SumSignal.cs" />

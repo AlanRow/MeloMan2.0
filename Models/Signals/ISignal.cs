@@ -9,10 +9,14 @@ namespace SpectrumVisor
     //объект позволяющий получить изменчивое перечисление значений сигнала
     abstract public class ISignal
     {
-        abstract public IEnumerable<double> GetValues();
-        virtual public int GetLength()
+        abstract public double GetValueAt(int time);
+        abstract public int GetLength();
+
+        virtual public IEnumerable<double> GetValues()
         {
-            return GetValues().Count();
+            for (var i = 0; i < GetLength(); i++)
+                yield return GetValueAt(i);
         }
+
     }
 }

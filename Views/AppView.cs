@@ -23,7 +23,7 @@ namespace SpectrumVisor.Views
         {
             this.margin = margin;
             signals = new SignalsView(controller);
-            spectrum = new SpectrumPanelView();
+            spectrum = new SpectrumPanelView(controller);
         }
 
         public AppView(AppController controller) : this(controller, DEFAULT_SIZE, DEFAULT_MARGIN) { }

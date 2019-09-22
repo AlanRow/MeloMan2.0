@@ -24,5 +24,10 @@ namespace SpectrumVisor.State.Signal
         {
             return signal;
         }
+
+        public override double GetValueAt(int time)
+        {
+            return signal[time];
+        }
     }
 }

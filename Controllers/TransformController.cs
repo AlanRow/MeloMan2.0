@@ -18,7 +18,7 @@ namespace SpectrumVisor.Controllers
         public TransformController(AppController application, AppModel model)
         {
             app = application;
-            view = new SpectrumPanelView();
+            view = new SpectrumPanelView(application);
         }
 
         public void Start()

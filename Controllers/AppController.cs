@@ -21,6 +21,7 @@ namespace SpectrumVisor.Controllers
         private AppForm form;
 
         private AddSignalController signalIniter;
+        private ConfigTransformController configTransform;
 
         //private SignalsController signals;
         //private TransformController transform;
@@ -40,8 +41,14 @@ namespace SpectrumVisor.Controllers
             form = new AppForm(view.View(AppContextConverter.GetContext(model)));
 
             signalIniter = new AddSignalController(model);
+            configTransform = new ConfigTransformController(model);
 
             model.Transformation.SignalsChanged += () =>
+            {
+                UpdateAppView();
+            };
+
+            model.Transformation.TransformChanged += () =>
             {
                 UpdateAppView();
             };
@@ -62,6 +69,11 @@ namespace SpectrumVisor.Controllers
         public void AddSignal()
         {
             signalIniter.AddSignal();
+        }
+
+        public void ChangeTransformConfigs()
+        {
+            configTransform.Config();
         }
 
         public void UpdateAppView()

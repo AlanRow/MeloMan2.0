@@ -21,7 +21,7 @@ namespace SpectrumVisor.Views
         private IInputFormController controller;
         private Form inputForm;
         private Label error;
-        private List<Tuple<Param, TextBox>> inputs;
+        private List<Tuple<Param, Control>> inputs;
         private int rows;
         private int columns;
 
@@ -59,7 +59,7 @@ namespace SpectrumVisor.Views
             table.RowStyles.Add(new RowStyle(SizeType.Absolute, FieldHeight + FieldSpace));
 
             //размещение элементов
-            inputs = new List<Tuple<Param, TextBox>>();
+            inputs = new List<Tuple<Param, Control>>();
             for (var i = 0; i < columns; i++)
             {
                 var column  = i;
@@ -82,12 +82,29 @@ namespace SpectrumVisor.Views
                             AutoSize = true
                         };
 
-                        var input = new TextBox
+                        Control input = new Panel();
+
+                        if (fields[i][j] is SwitchParam)
                         {
-                            Width = FieldWidth,
-                            Text = fields[i][j].GetStrValue(),
-                            Location = new Point(0, name.Height)
-                        };
+                            var param = (fields[i][j] as SwitchParam);
+                            input = new ComboBox
+                            {
+                                Width = FieldWidth,
+                                Text = param.GetStrValue(),
+                                Location = new Point(0, name.Height)
+                            };
+                            var inputBox = (input as ComboBox);
+                            inputBox.Items.AddRange(param.GetValidValues().ToArray());
+                        }
+                        else
+                        {
+                            input = new TextBox
+                            {
+                                Width = FieldWidth,
+                                Text = fields[i][j].GetStrValue(),
+                                Location = new Point(0, name.Height)
+                            };
+                        }
 
                         inputs.Add(Tuple.Create(fields[i][j], input));
                         field.Controls.Add(name);

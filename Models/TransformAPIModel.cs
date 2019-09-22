@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SpectrumVisor.Stuffs;
 using SpectrumVisor.Models.Signals;
 using SpectrumVisor.Models.Filters;
+using SpectrumVisor.Contexts;
 
 namespace SpectrumVisor.Models
 {
@@ -18,6 +19,7 @@ namespace SpectrumVisor.Models
         private IWindowFilter filter;
 
         readonly public SignalsManageModel ManageModel;
+
         public delegate void StateNotification();
         public event StateNotification SignalsChanged;
         public event StateNotification TransformChanged;
@@ -26,12 +28,24 @@ namespace SpectrumVisor.Models
         public TransformAPIModel(int size)
         {
             signals = new SignalsModel(size);
-            transform = new TransformModel(new TransformersSetModel());
+            transform = new TransformModel(new WindowsSetModel());
             filter = new RectangleFilter();
             ManageModel = new SignalsManageModel();
 
-            SignalsChanged = new StateNotification(() => Transform(new WindowedTransformStuff()));
+            SignalsChanged = new StateNotification(() => Transform());
             TransformChanged = new StateNotification(() => { });
+        }
+
+        public void SetConfigs(TransformStuff stuff)
+        {
+            transform.Current = stuff;
+            Transform();
+            TransformChanged();
+        }
+
+        public TransformStuff GetTransformConfigs()
+        {
+            return transform.Current;
         }
 
         public List<SinSignal> GetSignals()
@@ -44,14 +58,24 @@ namespace SpectrumVisor.Models
             return signals.Sum;
         }
 
-        //public ISignal GetFiltered()
-        //{
-        //    return filter.GetFiltered(GetSum());
-        //}
+        public ISignal GetFiltered()
+        {
+            return filter.GetFiltered(GetSum());
+        }
 
         public Spectrum GetTransform()
         {
             return transform.Spectrum;
+        }
+
+        public void SetWindowType(WindowType type)
+        {
+            transform.CurrentWindow = type;
+        }
+
+        public WindowType GetWindowType()
+        {
+            return transform.CurrentWindow;
         }
 
         //public ISignal GetSignalById(int id)
@@ -89,7 +113,13 @@ namespace SpectrumVisor.Models
 
         public void Transform(WindowedTransformStuff material)
         {
-            transform.Transform(material, GetSum(), filter);
+            transform.Transform(material, GetSum());
+            TransformChanged();
+        }
+
+        public void Transform()
+        {
+            transform.Transform(GetSum());
             TransformChanged();
         }
     }

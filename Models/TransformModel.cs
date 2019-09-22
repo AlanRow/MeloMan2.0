@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpectrumVisor.Models.Filters;
+using SpectrumVisor.Models.Transformers;
 using SpectrumVisor.Stuffs;
 
 namespace SpectrumVisor.Models
@@ -12,36 +13,49 @@ namespace SpectrumVisor.Models
     {
         //возможно стоит сделать это методом и обернуть в lock
         public Spectrum Spectrum { get; private set; }
-        public TransformStuff Current { get; private set; }
-        public WindowedTransformStuff CurrentWindowed { get; private set; }
-        private TransformersSetModel transformers;
+        //public WindowedTransformStuff CurrentWindowed { get; private set; }
+        private WindowsSetModel windows;
+        private ITransformer transformer;
 
-        public TransformModel(TransformersSetModel set)
+        public TransformStuff Current { get; set; }
+        public WindowType CurrentWindow { get; set; }
+
+        public TransformModel(WindowsSetModel set)
         {
-            transformers = set;
+            windows = set;
             Current = new TransformStuff();
-            CurrentWindowed = new WindowedTransformStuff();
+            //CurrentWindowed = null;
+            transformer = new FourierTransformer();
         }
 
-        public Spectrum Transform(WindowedTransformStuff stuff, ISignal signal, IWindowFilter window)
-        {
-            var log = new Logger("windowed_transform.log");
-            log.WriteLog("In model!");
-            log.Flush();
-            Spectrum = transformers.GetTransformer(stuff.Type).Transform(stuff, signal, window);
-            return Spectrum;
-        }
+        //public Spectrum Transform(WindowedTransformStuff stuff, ISignal signal, TransformType window)
+        //{
+        //    Spectrum = transformer.Transform(stuff, signal, windows.GetTransformer(window));
+        //    return Spectrum;
+        //}
+
+        //public Spectrum Transform(WindowedTransformStuff stuff, ISignal signal)
+        //{
+        //    Spectrum = transformer.Transform(stuff, signal, windows.GetTransformer(CurrentWindow));
+        //    return Spectrum;
+        //}
 
         public Spectrum Transform(TransformStuff stuff, ISignal signal)
         {
-            Spectrum = transformers.GetTransformer(stuff.Type).Transform(stuff, signal);
+            if (CurrentWindow == WindowType.NoWin)
+                Spectrum = transformer.Transform(stuff, signal);
+            else if (stuff is WindowedTransformStuff)
+                Spectrum = transformer.Transform((stuff as WindowedTransformStuff), signal, windows.GetTransformer(CurrentWindow));
+            else
+                Spectrum = transformer.Transform(new WindowedTransformStuff(stuff), signal, windows.GetTransformer(CurrentWindow));
+
             return Spectrum;
         }
 
         public Spectrum Transform(ISignal signal)
         {
-            if (CurrentWindowed != null)
-                return Transform(CurrentWindowed, signal);
+            //if (CurrentWindowed != null)
+            //    return Transform(CurrentWindowed, signal);
             
             return Transform(Current, signal);
         }

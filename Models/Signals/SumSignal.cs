@@ -21,16 +21,13 @@ namespace SpectrumVisor
             return manager.Size;
         }
 
-        override public IEnumerable<double> GetValues()
+        public override double GetValueAt(int time)
         {
-            for (var i = 0; i < manager.Size; i++)
-            {
-                var d = 0d;
-                foreach (var signal in manager.Signals)
-                    d += signal.GetValueAt(i);
+            var d = 0d;
+            foreach (var signal in manager.Signals)
+                d += signal.GetValueAt(time);
 
-                yield return d;
-            }
+            return d;
         }
     }
 }

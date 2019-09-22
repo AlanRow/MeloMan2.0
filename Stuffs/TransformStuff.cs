@@ -9,7 +9,7 @@ namespace SpectrumVisor.Stuffs
     //служит для объединения свойств преобразования
     public class TransformStuff
     {
-        public TransformType Type { get; set; }
+        public WindowType Type { get; set; }
         private double start;
         private double step;
         private int count;
@@ -62,7 +62,7 @@ namespace SpectrumVisor.Stuffs
 
         public TransformStuff(double start, double step, int count)
         {
-            Type = TransformType.Fourier;
+            Type = WindowType.NoWin;
             StartFreq = start;
             StepFreq = step;
             CountFreq = count;

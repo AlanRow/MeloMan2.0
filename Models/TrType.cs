@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpectrumVisor
 {
-    public enum TransformType
+    public enum WindowType
     {
-        Fourier,
-        Windowed,
+        NoWin,
+        Rectangle,
         Gabor
     }
 }
