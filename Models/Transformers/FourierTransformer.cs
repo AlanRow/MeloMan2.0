@@ -19,14 +19,14 @@ namespace SpectrumVisor.Models.Transformers
 
         public Spectrum Transform(WindowedTransformStuff stuff, ISignal signal, IWindowFilter filter)
         {
-            var times = signal.GetLength() / stuff.WinStep;
+            var times = signal.GetLength() / stuff.WinStep - 1;
             var spec = new Spectrum(stuff.CountFreq, times, signal.GetActualLength());
 
             //var log = new Logger("windowed_transform.log");
             //log.WriteLog(String.Format("Times: {0}", times));
             //log.Flush();
 
-            var c = 0;
+            var c = 128;
             for (var i = 0; i < times; i++)
             {
                 var tr = Transform(stuff, filter.GetFiltered(signal, c, stuff.WinSize)).GetFreqsAtTime(0);

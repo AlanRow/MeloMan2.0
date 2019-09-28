@@ -21,7 +21,7 @@ namespace SpectrumVisor.Models.Filters
 
         public RectangleFilter()
         {
-            center = 128;
+            center = 0;
             winSize = 128;
         }
 

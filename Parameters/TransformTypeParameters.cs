@@ -17,7 +17,8 @@ namespace SpectrumVisor.Parameters
                 [WindowType.NoWin] = "ДПФ без окна",
                 [WindowType.Rectangle] = "Прямоугольное окно",
                 [WindowType.Triangle] = "Треугольное окно",
-                [WindowType.Hann] = "Окно Ханна"
+                [WindowType.Hann] = "Окно Ханна",
+                [WindowType.Hamming] = "Окно Хэмминга"
             }), current);
         }
 

@@ -91,6 +91,7 @@
     <Compile Include="Converters\SignalContextConverter.cs" />
     <Compile Include="Converters\SpectrumContextConverter.cs" />
     <Compile Include="Models\AppModel.cs" />
+    <Compile Include="Models\Filters\HammingFilter.cs" />
     <Compile Include="Models\Filters\HannFilter.cs" />
     <Compile Include="Models\Filters\IFilter.cs" />
     <Compile Include="Models\Filters\NoFilter.cs" />
