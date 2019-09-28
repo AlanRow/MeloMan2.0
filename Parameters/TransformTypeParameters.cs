@@ -18,7 +18,8 @@ namespace SpectrumVisor.Parameters
                 [WindowType.Rectangle] = "Прямоугольное окно",
                 [WindowType.Triangle] = "Треугольное окно",
                 [WindowType.Hann] = "Окно Ханна",
-                [WindowType.Hamming] = "Окно Хэмминга"
+                [WindowType.Hamming] = "Окно Хэмминга",
+                [WindowType.Gabor] = "Преобразование Габора"
             }), current);
         }
 

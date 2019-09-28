@@ -20,8 +20,8 @@ namespace SpectrumVisor.Models
                 [WindowType.Rectangle] = new RectangleFilter(),
                 [WindowType.Triangle] = new TriangleFilter(),
                 [WindowType.Hann] = new HannFilter(),
-                [WindowType.Hamming] = new HammingFilter()
-                //[TransformType.Gabor] = new GaborFilter()
+                [WindowType.Hamming] = new HammingFilter(),
+                [WindowType.Gabor] = new GaborFilter()
             };
         }
 
