@@ -60,7 +60,8 @@ namespace SpectrumVisor.Models
 
         public ISignal GetFiltered()
         {
-            return filter.GetFiltered(GetSum());
+            return transform.GetWindow().GetFiltered(GetSum());
+            //return filter.GetFiltered(GetSum());
         }
 
         public Spectrum GetTransform()
@@ -70,12 +71,12 @@ namespace SpectrumVisor.Models
 
         public void SetWindowType(WindowType type)
         {
-            transform.CurrentWindow = type;
+            transform.WindowType = type;
         }
 
         public WindowType GetWindowType()
         {
-            return transform.CurrentWindow;
+            return transform.WindowType;
         }
 
         //public ISignal GetSignalById(int id)

@@ -18,5 +18,10 @@ namespace SpectrumVisor
                 yield return GetValueAt(i);
         }
 
+        virtual public int GetActualLength()
+        {
+            return GetLength();
+        }
+
     }
 }

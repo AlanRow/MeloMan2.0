@@ -9,13 +9,16 @@ namespace SpectrumVisor.Models
     public class Spectrum
     {
         public FreqPoint[][] SpectrumMatrix { get; private set; }
+        private int timeFactor;
 
-        public Spectrum(int freqs, int times)
+        public Spectrum(int freqs, int times, int sumTimes)
         {
             SpectrumMatrix = new FreqPoint[times][];
 
             for (var t = 0; t < times; t++)
                 SpectrumMatrix[t] = new FreqPoint[freqs];
+
+            timeFactor = sumTimes;
         }
 
         public double GetFreqDiff()
@@ -63,6 +66,14 @@ namespace SpectrumVisor.Models
         public FreqPoint[] GetFreqsAtTime(int time)
         {
             return SpectrumMatrix[time];
+        }
+
+        public IEnumerable<double> GetDensitiesAtTime(int time)
+        {
+            for (var i = 0; i < GetFreqSize(); i++)
+            {
+                yield return (SpectrumMatrix[time][i].Coords.Magnitude * SpectrumMatrix[time][i].Coords.Magnitude) / timeFactor;
+            }
         }
     }
 }

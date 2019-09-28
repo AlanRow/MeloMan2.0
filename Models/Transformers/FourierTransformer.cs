@@ -19,18 +19,20 @@ namespace SpectrumVisor.Models.Transformers
 
         public Spectrum Transform(WindowedTransformStuff stuff, ISignal signal, IWindowFilter filter)
         {
-            var times = (signal.GetLength() - stuff.WinSize) / stuff.WinStep;
-            var spec = new Spectrum(stuff.CountFreq, times);
+            var times = signal.GetLength() / stuff.WinStep;
+            var spec = new Spectrum(stuff.CountFreq, times, signal.GetActualLength());
 
-            var log = new Logger("windowed_transform.log");
-            log.WriteLog(String.Format("Times: {0}", times));
-            log.Flush();
+            //var log = new Logger("windowed_transform.log");
+            //log.WriteLog(String.Format("Times: {0}", times));
+            //log.Flush();
 
-            var c = stuff.LeftWinSize;
+            var c = 0;
             for (var i = 0; i < times; i++)
             {
-                spec.SetAtTime(i, Transform(stuff, filter.GetFiltered(signal, c, stuff.WinSize)).GetFreqsAtTime(0));
-                c += stuff.WinSize;
+                var tr = Transform(stuff, filter.GetFiltered(signal, c, stuff.WinSize)).GetFreqsAtTime(0);
+                spec.SetAtTime(i, tr);
+
+                c += stuff.WinStep;
             }
 
             return spec;
@@ -38,7 +40,7 @@ namespace SpectrumVisor.Models.Transformers
 
         virtual public Spectrum Transform(TransformStuff stuff, ISignal signal)
         {
-            var spectrum = new Spectrum(stuff.CountFreq, 1);
+            var spectrum = new Spectrum(stuff.CountFreq, 1, signal.GetActualLength());
             var freqs = stuff.GetFreqs();
             
             for (var i = 0; i < freqs.Length; i++)

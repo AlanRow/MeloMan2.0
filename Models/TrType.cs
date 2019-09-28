@@ -10,6 +10,9 @@ namespace SpectrumVisor
     {
         NoWin,
         Rectangle,
+        Triangle,
+        Hann,
+        Hamming,
         Gabor
     }
 }

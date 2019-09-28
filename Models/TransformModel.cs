@@ -18,7 +18,7 @@ namespace SpectrumVisor.Models
         private ITransformer transformer;
 
         public TransformStuff Current { get; set; }
-        public WindowType CurrentWindow { get; set; }
+        public WindowType WindowType { get; set; }
 
         public TransformModel(WindowsSetModel set)
         {
@@ -42,12 +42,12 @@ namespace SpectrumVisor.Models
 
         public Spectrum Transform(TransformStuff stuff, ISignal signal)
         {
-            if (CurrentWindow == WindowType.NoWin)
+            if (WindowType == WindowType.NoWin)
                 Spectrum = transformer.Transform(stuff, signal);
             else if (stuff is WindowedTransformStuff)
-                Spectrum = transformer.Transform((stuff as WindowedTransformStuff), signal, windows.GetTransformer(CurrentWindow));
+                Spectrum = transformer.Transform((stuff as WindowedTransformStuff), signal, GetWindow());
             else
-                Spectrum = transformer.Transform(new WindowedTransformStuff(stuff), signal, windows.GetTransformer(CurrentWindow));
+                Spectrum = transformer.Transform(new WindowedTransformStuff(stuff), signal, GetWindow());
 
             return Spectrum;
         }
@@ -58,6 +58,11 @@ namespace SpectrumVisor.Models
             //    return Transform(CurrentWindowed, signal);
             
             return Transform(Current, signal);
+        }
+
+        public IWindowFilter GetWindow()
+        {
+            return windows.GetTransformer(WindowType);
         }
     }
 }

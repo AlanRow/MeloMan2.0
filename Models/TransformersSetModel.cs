@@ -17,8 +17,11 @@ namespace SpectrumVisor.Models
             set = new Dictionary<WindowType, IWindowFilter>
             {
                 [WindowType.NoWin] = new NoFilter(),
-                [WindowType.Rectangle] = new RectangleFilter()
-                //[TransformType.Gabor] = new GaborTransformer()
+                [WindowType.Rectangle] = new RectangleFilter(),
+                [WindowType.Triangle] = new TriangleFilter(),
+                [WindowType.Hann] = new HannFilter()
+                //[WindowType.Hamming] = new HammingFilter,
+                //[TransformType.Gabor] = new GaborFilter()
             };
         }
 

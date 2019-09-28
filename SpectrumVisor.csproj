@@ -91,9 +91,11 @@
     <Compile Include="Converters\SignalContextConverter.cs" />
     <Compile Include="Converters\SpectrumContextConverter.cs" />
     <Compile Include="Models\AppModel.cs" />
+    <Compile Include="Models\Filters\HannFilter.cs" />
     <Compile Include="Models\Filters\IFilter.cs" />
     <Compile Include="Models\Filters\NoFilter.cs" />
     <Compile Include="Models\Filters\RectangleFilter.cs" />
+    <Compile Include="Models\Filters\TriangleFilter.cs" />
     <Compile Include="Models\FreqPoint.cs" />
     <Compile Include="Models\GraphicsContextModel.cs" />
     <Compile Include="Models\IFreqCalculator.cs" />
