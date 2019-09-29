@@ -31,6 +31,8 @@ namespace SpectrumVisor.Views
 
         private SpectrumViewContext lastContext;
 
+        static readonly public int ControlPanHeight = 30;
+
         public SpectrumPanelView(AppController controller)
         {
             views = new Dictionary<ViewType, ISpectrumView>
@@ -65,7 +67,7 @@ namespace SpectrumVisor.Views
 
         public Panel View(SpectrumViewContext context)
         {
-            var pan = new Panel
+            var pan = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill
             };
@@ -76,15 +78,17 @@ namespace SpectrumVisor.Views
             var controlPan = new FlowLayoutPanel
             {
                 Dock = DockStyle.Top,
-                Height = 50,
                 FlowDirection = FlowDirection.LeftToRight
             };
 
             controlPan.Controls.Add(viewChangeBox);
             controlPan.Controls.Add(configButt);
 
-            pan.Controls.Add(controlPan);
-            pan.Controls.Add(lastSpectrum);
+            pan.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+            pan.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
+
+            pan.Controls.Add(controlPan, 0, 0);
+            pan.Controls.Add(lastSpectrum, 0, 1);
 
             lastView = pan;
             lastContext = context;
