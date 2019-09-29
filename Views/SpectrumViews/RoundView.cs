@@ -37,7 +37,7 @@ namespace SpectrumVisor.Views.SpectrumViews
             round.Paint += (sender, ev) =>
             {
                 var freq = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Freq;
-                var center = context.Transformed.GetFreqsAtTime(timeInd)[freqInd].Coords / context.Origin.GetLength();
+                var center = context.Transformed.GetMassAtFreqTime(timeInd, freqInd);
                 var points = context.Origin.GetValues().Select((v, i) => Complex.FromPolarCoordinates(v, -i * freq * 2 * Math.PI / context.Origin.GetLength()/* * timeFactor */))
                                                        .ToArray();
 

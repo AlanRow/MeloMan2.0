@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +67,11 @@ namespace SpectrumVisor.Models
         public FreqPoint[] GetFreqsAtTime(int time)
         {
             return SpectrumMatrix[time];
+        }
+
+        public Complex GetMassAtFreqTime(int time, int freq)
+        {
+            return SpectrumMatrix[time][freq].Coords / timeFactor;
         }
 
         public IEnumerable<double> GetDensitiesAtTime(int time)
