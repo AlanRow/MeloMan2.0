@@ -76,7 +76,7 @@ namespace SpectrumVisor.Views
             var controlPan = new FlowLayoutPanel
             {
                 Dock = DockStyle.Top,
-                Height = 100,
+                Height = 50,
                 FlowDirection = FlowDirection.LeftToRight
             };
 
