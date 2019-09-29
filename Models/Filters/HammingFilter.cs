@@ -24,7 +24,7 @@ namespace SpectrumVisor.Models.Filters
 
         public HammingFilter()
         {
-            center = 128;
+            center = 0;
             winSize = 128;
             window = new RectangleFilter();
         }

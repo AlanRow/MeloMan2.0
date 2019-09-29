@@ -59,23 +59,6 @@ namespace SpectrumVisor.Views
             return list;
         }
 
-        //private Button GetAddButton()
-        //{
-        //    var button = new Button
-        //    {
-        //        Height = frameHeight - 10,
-        //        Width = list.Width - 20,
-        //        Text = "Добавить"
-        //    };
-
-        //    button.Click += (sender, ev) =>
-        //    {
-        //        var creatingDialog = new AddSignalDialog(signalState).ShowDialog();
-        //    };
-
-        //    return button;
-        //}
-
         private Panel GetSignalFrame(SignalViewContext context)
         {
             var frame = new Panel

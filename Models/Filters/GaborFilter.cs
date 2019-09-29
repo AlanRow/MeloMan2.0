@@ -21,15 +21,13 @@ namespace SpectrumVisor.Models.Filters
         {
             center = stuff.Center;
             winSize = stuff.Size;
-            //alpha = winSize / 3.8286;
             window = new RectangleFilter(stuff);
         }
 
         public GaborFilter()
         {
-            center = 128;
+            center = 0;
             winSize = 128;
-            //alpha = winSize / 3.8286;
             window = new RectangleFilter();
         }
 
@@ -53,8 +51,6 @@ namespace SpectrumVisor.Models.Filters
         public void SetWinSize(int size)
         {
             winSize = size;
-            //size/2a = 1.9143
-            //alpha = size / 3.8286;
         }
     }
 }

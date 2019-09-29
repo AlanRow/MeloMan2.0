@@ -69,6 +69,7 @@ namespace SpectrumVisor.Controllers
         public void AddSignal()
         {
             signalIniter.AddSignal();
+            UpdateAppView();
         }
 
         public void ChangeTransformConfigs()
