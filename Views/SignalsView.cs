@@ -54,7 +54,7 @@ namespace SpectrumVisor.Views
             var viewChangeBox = new ComboBox();
             viewChangeBox.Items.Add(new BoxItem(ViewType.All, "Все"));
             viewChangeBox.Items.Add(new BoxItem(ViewType.Sum, "Сумма"));
-            viewChangeBox.Items.Add(new BoxItem(ViewType.Norm, "Окно"));
+            //viewChangeBox.Items.Add(new BoxItem(ViewType.Norm, "Окно"));
             viewChangeBox.SelectedIndexChanged += (sender, ev) => {
                 currentView = ((ViewType)((BoxItem)((ComboBox)sender).SelectedItem).Key);
                 SwitchView();

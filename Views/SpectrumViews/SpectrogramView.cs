@@ -24,7 +24,6 @@ namespace SpectrumVisor.Views.SpectrumViews
             };
 
             var intensities = new byte[context.Transformed.GetTimeSize(), context.Transformed.GetFreqSize()];
-            var logger = new Logger("max_magns.txt");
 
             for (var i = 0; i < intensities.GetLength(0); i++)
             {
@@ -32,7 +31,6 @@ namespace SpectrumVisor.Views.SpectrumViews
                     .ToArray();
 
                 var max = density.Max();
-                logger.WriteLog(String.Format("Time: {0}, MaxValue: {1}", i, max));
 
 
                 for (var j = 0; j < intensities.GetLength(1); j++)
@@ -40,8 +38,6 @@ namespace SpectrumVisor.Views.SpectrumViews
                     intensities[i, j] = max > 0 ? (byte)(density[intensities.GetLength(1) - j - 1] * 255 / max) : (byte)0;
                 }
             }
-
-            logger.Flush();
 
             var box = DrawSpectrogram(pan.ClientSize, intensities);
             pan.Controls.Add(box);
@@ -65,8 +61,6 @@ namespace SpectrumVisor.Views.SpectrumViews
                     spectrogram.SetPixel(i, j, Color.FromArgb(intens, intens, intens));
                 }
             }
-
-            spectrogram.Save("spectrum");
 
             box.SizeMode = PictureBoxSizeMode.StretchImage;
             box.Image = spectrogram;
